@@ -1,0 +1,30 @@
+[
+  {
+    "Name": "Гоблин Громилка",
+    "Cost": 2,
+    "Attack": 3,
+    "Health": 4,
+    "Type": "Creature"
+  },
+  {
+    "Name": "Эльф-Лучник",
+    "Cost": 1,
+    "Attack": 2,
+    "Health": 2,
+    "Type": "Creature"
+  },
+  {
+    "Name": "Драконетта Пылающего Огня",
+    "Cost": 2,
+    "Attack": 3,
+    "Health": 4,
+    "Type": "Creature"
+  },
+  {
+    "Name": "Орк-Метатель Топоров",
+    "Cost": 1,
+    "Attack": 2,
+    "Health": 2,
+    "Type": "Creature"
+  }
+]
