@@ -3,38 +3,62 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
-public class Card
+// Interface for cards
+public interface ICard
+{
+    string Name { get; set; }
+    int Cost { get; set; }
+
+    void Use();
+}
+
+// Witch class that implements ICard and can create both good and bad spells
+public class WitchCard : ICard
 {
     public string Name { get; set; }
     public int Cost { get; set; }
 
-    public virtual void Use()
+    public List<SpellType> SpellTypes { get; set; }
+
+    public WitchCard()
     {
-        // Логика использования карты
-        Console.WriteLine($"Использована карта: {Name}");
+        SpellTypes = new List<SpellType>();
+    }
+
+    public void Use()
+    {
+        Console.WriteLine($"Witch card used: {Name}");
+        Console.WriteLine("Created spells:");
+        foreach (var spellType in SpellTypes)
+        {
+            Console.WriteLine($"- {spellType}");
+        }
     }
 }
 
-public class CreatureCard : Card
+// Other card classes
+public class CreatureCard : ICard
 {
+    public string Name { get; set; }
+    public int Cost { get; set; }
     public int Attack { get; set; }
     public int Health { get; set; }
 
-    public override void Use()
+    public void Use()
     {
-        // Логика использования карты существа
-        Console.WriteLine($"Использована карта существа: {Name}");
+        Console.WriteLine($"Creature card used: {Name}");
     }
 }
 
-public class SpellCard : Card
+public class SpellCard : ICard
 {
+    public string Name { get; set; }
+    public int Cost { get; set; }
     public SpellType SpellType { get; set; }
 
-    public override void Use()
+    public void Use()
     {
-        // Логика использования карты заклинания
-        Console.WriteLine($"Использована карта заклинания: {Name}");
+        Console.WriteLine($"Spell card used: {Name}");
     }
 }
 
@@ -45,33 +69,32 @@ public enum SpellType
     Enhancement
 }
 
+// Updated Player class to handle ICard
 public class Player
 {
     public string Name { get; set; }
-    public List<Card> Deck { get; set; }
-    public List<Card> Hand { get; set; }
+    public List<ICard> Deck { get; set; }
+    public List<ICard> Hand { get; set; }
     public List<CreatureCard> Battlefield { get; set; }
     public bool IsCurrentPlayer { get; set; }
 
     public Player()
     {
-        Deck = new List<Card>();
-        Hand = new List<Card>();
+        Deck = new List<ICard>();
+        Hand = new List<ICard>();
         Battlefield = new List<CreatureCard>();
     }
 
     public void DrawCard(int CardCount)
     {
-        // Предположим, что у вас есть колода, и вам нужно взять карту из колоды
         if (Deck.Count > 0)
         {
             for (int i = 0; i < CardCount; i++)
             {
-                Card drawnCard = Deck[0];
+                ICard drawnCard = Deck[0];
                 Deck.RemoveAt(0);
                 Hand.Add(drawnCard);
             }
-
         }
     }
 
@@ -79,75 +102,66 @@ public class Player
     {
         if (cardIndex >= 0 && cardIndex < Hand.Count)
         {
-            Card playedCard = Hand[cardIndex];
+            ICard playedCard = Hand[cardIndex];
             Hand.RemoveAt(cardIndex);
             playedCard.Use();
         }
     }
 }
 
+// Updated Game class to use ICard
 public class Game
 {
     public Player Player1 { get; set; }
     public Player Player2 { get; set; }
     private Random random = new Random();
 
-    private List<Card> LoadDeckFromFile
+    private List<ICard> LoadDeckFromFile
     {
         get
         {
             string json = File.ReadAllText("deck.json");
-            return JsonConvert.DeserializeObject<List<Card>>(json);
+            return JsonConvert.DeserializeObject<List<ICard>>(json);
         }
     }
 
     public void StartGame()
     {
-        // Инициализация игроков и их колод
         InitializePlayers();
 
-        // Загрузка колоды из файла
         Player1.Deck = LoadDeckFromFile;
         Player2.Deck = LoadDeckFromFile;
 
-        // Перемешивание колоды каждого игрока
         ShuffleDeck(Player1.Deck);
         ShuffleDeck(Player2.Deck);
 
-        // Раздача карт каждому игроку
         Player1.DrawCard(3);
         Player2.DrawCard(3);
 
-        Player1.Name = "Игрок 1";
-        Player2.Name = "Игрок 2";
+        Player1.Name = "Player 1";
+        Player2.Name = "Player 2";
 
-        // Определение первого хода
         DetermineFirstPlayer();
 
-        // Вывод информации о начале игры
         DisplayGameState();
 
-        // Начало игры
         PlayTurn();
-
-
     }
+
     private void InitializePlayers()
     {
         Player1 = new Player();
         Player2 = new Player();
-        // Инициализация колод и других свойств игроков
     }
 
-    private void ShuffleDeck(List<Card> deck)
+    private void ShuffleDeck(List<ICard> deck)
     {
-        // Перемешивания колоды
         int n = deck.Count;
         while (n > 1)
         {
             n--;
             int k = random.Next(n + 1);
-            Card value = deck[k];
+            ICard value = deck[k];
             deck[k] = deck[n];
             deck[n] = value;
         }
@@ -155,7 +169,6 @@ public class Game
 
     private void DetermineFirstPlayer()
     {
-        // Кому принадлежит первый ход
         if (random.Next(2) == 0)
         {
             Player1.IsCurrentPlayer = true;
@@ -168,14 +181,14 @@ public class Game
 
     private void DisplayGameState()
     {
-        Console.WriteLine("Игра началась!");
-        Console.WriteLine($"Игрок 1: {Player1.Name}");
-        Console.WriteLine($"Игрок 2: {Player2.Name}");
+        Console.WriteLine("Game started!");
+        Console.WriteLine($"Player 1: {Player1.Name}");
+        Console.WriteLine($"Player 2: {Player2.Name}");
 
-        Console.WriteLine($"Игрок 1 карты на руке: {Player1.Hand.Count}");
-        Console.WriteLine($"Игрок 2 карты на руке: {Player2.Hand.Count}");
+        Console.WriteLine($"Player 1 cards in hand: {Player1.Hand.Count}");
+        Console.WriteLine($"Player 2 cards in hand: {Player2.Hand.Count}");
 
-        Console.WriteLine($"Первым ходит: {(Player1.IsCurrentPlayer ? Player1.Name : Player2.Name)}");
+        Console.WriteLine($"First move by: {(Player1.IsCurrentPlayer ? Player1.Name : Player2.Name)}");
     }
 
     private void PlayTurn()
@@ -184,42 +197,38 @@ public class Game
         {
             Player currentPlayer = Player1.IsCurrentPlayer ? Player1 : Player2;
 
-            // Добор карты из колоды в начале хода
             currentPlayer.DrawCard(1);
 
             DisplayPlayerHand(currentPlayer);
 
-            Console.Write($"{currentPlayer.Name}, выберите карту для игры (0-{currentPlayer.Hand.Count - 1}): ");
+            Console.Write($"{currentPlayer.Name}, choose a card to play (0-{currentPlayer.Hand.Count - 1}): ");
             int selectedCardIndex;
             while (!int.TryParse(Console.ReadLine(), out selectedCardIndex) || selectedCardIndex < 0 || selectedCardIndex >= currentPlayer.Hand.Count)
             {
-                Console.Write("Некорректный ввод. Повторите выбор: ");
+                Console.Write("Invalid input. Please choose again: ");
             }
 
-            // Используем карту
             currentPlayer.PlayCard(selectedCardIndex);
 
-            // Переключение хода к другому игроку
             Player1.IsCurrentPlayer = !Player1.IsCurrentPlayer;
             Player2.IsCurrentPlayer = !Player2.IsCurrentPlayer;
         }
 
-        Console.WriteLine("Игра завершена!");
+        Console.WriteLine("Game over!");
     }
-
 
     private bool IsGameOver()
     {
-        // Услвие окончания игры
+        // Game over condition
         return false;
     }
 
     private void DisplayPlayerHand(Player player)
     {
-        Console.WriteLine($"Рука игрока {player.Name}:");
+        Console.WriteLine($"Player {player.Name}'s hand:");
         for (int i = 0; i < player.Hand.Count; i++)
         {
-            Console.WriteLine($"{i}. {player.Hand[i].Name} (Стоимость: {player.Hand[i].Cost})");
+            Console.WriteLine($"{i}. {player.Hand[i].Name} (Cost: {player.Hand[i].Cost})");
         }
     }
 }
