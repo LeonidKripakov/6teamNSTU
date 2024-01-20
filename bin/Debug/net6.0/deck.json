@@ -1,0 +1,52 @@
+[
+  {
+    "$type": "CardGame.WitchCard, CardGame",
+    "Name": "Witch Spellcaster",
+    "Cost": 5,
+    "SpellTypes": [ "Healing", "Attack" ]
+  },
+  {
+    "$type": "CardGame.WitchCard, CardGame",
+    "Name": "Dark Sorceress",
+    "Cost": 6,
+    "SpellTypes": [ "Attack", "Enhancement" ]
+  },
+  {
+    "$type": "CardGame.CreatureCard, CardGame",
+    "Name": "Fire Dragon",
+    "Cost": 8,
+    "Attack": 10,
+    "Health": 8
+  },
+  {
+    "$type": "CardGame.CreatureCard, CardGame",
+    "Name": "Stone Golem",
+    "Cost": 7,
+    "Attack": 8,
+    "Health": 10
+  },
+  {
+    "$type": "CardGame.SpellCard, CardGame",
+    "Name": "Healing Touch",
+    "Cost": 3,
+    "SpellType": "Healing"
+  },
+  {
+    "$type": "CardGame.SpellCard, CardGame",
+    "Name": "Fireball",
+    "Cost": 4,
+    "SpellType": "Attack"
+  },
+  {
+    "$type": "CardGame.SpellCard, CardGame",
+    "Name": "Strength Enhancement",
+    "Cost": 2,
+    "SpellType": "Enhancement"
+  },
+  {
+    "$type": "CardGame.WitchCard, CardGame",
+    "Name": "Nature Conjurer",
+    "Cost": 7,
+    "SpellTypes": [ "Healing", "Enhancement" ]
+  }
+]
