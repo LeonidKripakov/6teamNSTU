@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
+        #pragma warning disable CS8765
+    #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 public class ICardConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)
@@ -15,7 +17,7 @@ public class ICardConverter : JsonConverter
         return typeof(ICard).IsAssignableFrom(objectType);
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         JObject? jsonObject = JObject.Load(reader);
 

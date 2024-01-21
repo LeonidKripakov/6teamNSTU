@@ -9,7 +9,7 @@ namespace CardGame
 {
     public class Game
     {
-        
+        #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
         private Random random = new Random();
@@ -46,6 +46,7 @@ namespace CardGame
             var cardConverter = new ICardConverter();
             settings.Converters.Add(cardConverter);
 
+ 
             List<ICard> cards = JsonConvert.DeserializeObject<List<ICard>>(json, settings);
 
             PlayTurn();
