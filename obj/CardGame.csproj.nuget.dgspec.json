@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj": {}
+    "c:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj": {
+    "c:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj",
+        "projectUniqueName": "c:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj",
         "projectName": "CardGame",
-        "projectPath": "C:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj",
+        "projectPath": "c:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj",
         "packagesPath": "C:\\Users\\leoni\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\obj\\",
+        "outputPath": "c:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

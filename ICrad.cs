@@ -8,7 +8,7 @@ namespace CardGame
 {
     public interface ICard
     {
-        string Name { get; set; }
+        string? Name { get; set; }
         int Cost { get; set; }
 
         void Use();

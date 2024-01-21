@@ -8,7 +8,7 @@ namespace CardGame
 {
     public class Player
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public List<ICard> Deck { get; set; }
         public List<ICard> Hand { get; set; }
         public List<CreatureCard> Battlefield { get; set; }

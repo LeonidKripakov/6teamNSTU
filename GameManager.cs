@@ -10,10 +10,13 @@ namespace CardGame
     public class GameManager
     {
         public static List<ICard> LoadDeckFromFile(string filePath)
-        {
-            string json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<List<ICard>>(json);
-        }
+    {
+        string json = File.ReadAllText(filePath);
+        var settings = new JsonSerializerSettings();
+        var cardConverter = new ICardConverter();
+        settings.Converters.Add(cardConverter);
+        return JsonConvert.DeserializeObject<List<ICard>>(json, settings);
+    }
 
         public static void DisplayGameState(Player player1, Player player2)
         {

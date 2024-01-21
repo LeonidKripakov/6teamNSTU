@@ -8,7 +8,7 @@ namespace CardGame
 {
     public class CreatureCard : ICard
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Cost { get; set; }
         public int Attack { get; set; }
         public int Health { get; set; }

@@ -14,7 +14,7 @@ namespace CardGame
     }
     public class SpellCard : ICard
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Cost { get; set; }
         public SpellType SpellType { get; set; }
 

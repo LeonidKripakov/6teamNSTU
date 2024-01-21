@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 namespace CardGame
 {
     public class WitchCard : ICard
+{
+    public string? Name { get; set; } // Use nullable reference type syntax
+    public int Cost { get; set; }
+
+    public List<SpellType> SpellTypes { get; set; }
+
+    public WitchCard()
     {
-        public string Name { get; set; }
-        public int Cost { get; set; }
+        SpellTypes = new List<SpellType>();
+    }
 
-        public List<SpellType> SpellTypes { get; set; }
-
-        public WitchCard()
+    public void Use()
+    {
+        Console.WriteLine($"Witch card used: {Name ?? "Unnamed"}");
+        Console.WriteLine("Created spells:");
+        foreach (var spellType in SpellTypes)
         {
-            SpellTypes = new List<SpellType>();
-        }
-
-        public void Use()
-        {
-            Console.WriteLine($"Witch card used: {Name}");
-            Console.WriteLine("Created spells:");
-            foreach (var spellType in SpellTypes)
-            {
-                Console.WriteLine($"- {spellType}");
-            }
+            Console.WriteLine($"- {spellType}");
         }
     }
+}
 }
 

@@ -9,13 +9,20 @@ namespace CardGame
 {
     public class Game
     {
+        
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
         private Random random = new Random();
 
+
+        public Game()
+        {
+            Player1 = new Player();
+            Player2 = new Player();
+        }
         public void StartGame()
         {
-            InitializePlayers();
+            
 
             Player1.Deck = GameManager.LoadDeckFromFile("deck.json");
             Player2.Deck = GameManager.LoadDeckFromFile("deck.json");
@@ -115,7 +122,9 @@ namespace CardGame
 
         private bool IsGameOver()
         {
-            // Game over condition
+            if (Player1.Hand.Count <= 0 || Player2.Hand.Count <= 0)
+                return true;
+
             return false;
         }
 
