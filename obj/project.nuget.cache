@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5rOeqP4m0Tz3uICehPG7GqIf/vxWhoUsavy2TDDfwct1q/ivLZwnWOt12Y1VXkNX9eHAaVemOOjP/6ZY9i7/SA==",
+  "dgSpecHash": "fDx8nTsnKJ6balsXUaB5vglOVfVn4e9QVelL8Yznm2KtvCu2VCAEycOFMnJ9YETSz+YcItbiU2o+5flaWJauSg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj",
+  "projectFilePath": "C:\\Users\\leoni\\source\\repos\\6teamNSTU-1\\CardGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\leoni\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
